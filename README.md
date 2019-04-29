@@ -7,16 +7,16 @@ Required to get an AWS Rekognition account and obtain Access Key ID and Secret A
 
 Once that is setup, you will need to create a collection. To create a collection:-
 
-<code>cd</code>
-<code>cd /smartdb/script</code>
-<code>python add_collection.py -n 'collectionName'</code>
+<li><code>cd</code></li>
+<li><code>cd /smartdb/script</code></li>
+<li><code>python add_collection.py -n 'collectionName'</code></li>
 #enter the name of the collection like 'home' or 'family' or 'peopleiknow'. You can create as many, but only 1 collection will work for this automation.
 
 You will then need to rekognition to know who is who. Around 3-5 images per person would be good.
 
-<code>cd</code>
-<code>cd /smartdb/faces</code>
-<code>python /home/pi/smartdb/scripts/add_faces.py -i 'imagename.jpg' -c 'collectionName' -l 'name'</code>
+<li><code>cd</code></li>
+<li><code>cd /smartdb/faces</code></li>
+<li><code>python /home/pi/smartdb/scripts/add_faces.py -i 'imagename.jpg' -c 'collectionName' -l 'name'</code></li>
 
 
 <strong>Files</bstrong>
