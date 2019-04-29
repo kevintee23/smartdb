@@ -1,0 +1,15 @@
+[Unit]
+Description=gunicorn daemon for /home/pi/smartdb/hook.py
+After=network.target
+
+[Service]
+User=pi
+Group=www-data
+RuntimeDirectory=gunicorn
+WorkingDirectory=/home/pi/smartdb
+ExecStart=/usr/bin/gunicorn -b 0.0.0.0:5000 hook:app
+ExecReload=/bin/kill -s HUP $MAINPID
+ExecStop=/bin/kill -s TERM $MAINPID
+
+[Install]
+WantedBy=multi-user.target
