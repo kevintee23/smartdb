@@ -7,17 +7,19 @@ Required to get an AWS Rekognition account and obtain Access Key ID and Secret A
 
 Once that is setup, you will need to create a collection. To create a collection:-
 
-cd
-cd /smartdb/script
-python add_collection.py -n 'collectionName'
+<code>cd</code>
+<code>cd /smartdb/script</code>
+<code>python add_collection.py -n 'collectionName'</code>
 #enter the name of the collection like 'home' or 'family' or 'peopleiknow'. You can create as many, but only 1 collection will work for this automation.
 
 You will then need to rekognition to know who is who. Around 3-5 images per person would be good.
 
-cd
-cd /smartdb/faces
-python /home/pi/smartdb/scripts/add_faces.py -i 'imagename.jpg' -c 'collectionName' -l 'name'
+<code>cd</code>
+<code>cd /smartdb/faces</code>
+<code>python /home/pi/smartdb/scripts/add_faces.py -i 'imagename.jpg' -c 'collectionName' -l 'name'</code>
 
+
+<strong>Files</bstrong>
 
 install.sh - will install all dependencies as well as set permissions
 
@@ -26,4 +28,4 @@ hook.py - a flask app that will run when a GET query is made to 0.0.0.0:5000 and
 takepicture.py - snaps a photo and sends to aws rekognition to identify and post results to webcore
 
 hoo.service - a guincorn daemon that will run the hook.py on the background
-..
+...
