@@ -37,7 +37,7 @@ def get_args():
 def check_face(client, file):
     face_detected = False
     with open(file, 'rb') as image:
-        response = client.detect_faces(Image={'Bytes': image.read()})
+        response = client.detect_faces(Image={'Bytes': image.read()}, Attributes=['ALL'])
         if (not response['FaceDetails']):
             face_detected = False
         else: 
@@ -75,9 +75,10 @@ def main():
     
         if (resu):
             print '[+] Identity matched %s with %r similarity and %r confidence...' % (res['FaceMatches'][0]['Face']['ExternalImageId'], round(res['FaceMatches'][0]['Similarity'], 1), round(res['FaceMatches'][0]['Face']['Confidence'], 2))
-            r = requests.post(url, data={'person':res['FaceMatches'][0]['Face']['ExternalImageId'], 'similarity':res['FaceMatches'][0]['Similarity'], 'confidence':res['FaceMatches'][0]['Face']['Confidence']})
+            r = requests.post(url, data={'person':res['FaceMatches'][0]['Face']['ExternalImageId'], 'similarity':round(res['FaceMatches'][0]['Similarity'], 2), 'confidence':round(res['FaceMatches'][0]['Face']['Confidence'], 2), 'faceConfidence':round(resp['FaceDetails'][0]['Confidence'], 2), 'ageHigh':resp['FaceDetails'][0]['AgeRange']['High'], 'ageLow':resp['FaceDetails'][0]['AgeRange']['Low'], 'gender':resp['FaceDetails'][0]['Gender']['Value'], 'genderConf':round(resp['FaceDetails'][0]['Gender']['Confidence'], 2), 'mustache':resp['FaceDetails'][0]['Mustache']['Value'], 'sunglasses':resp['FaceDetails'][0]['Sunglasses']['Value']})
         else:
             print '[-] No face matches detected...' 
+	    r = requests.post(url, data={'person':'Unknown', 'faceConfidence':round(resp['FaceDetails'][0]['Confidence'], 2), 'ageHigh':resp['FaceDetails'][0]['AgeRange']['High'], 'ageLow':resp['FaceDetails'][0]['AgeRange']['Low'], 'gender':resp['FaceDetails'][0]['Gender']['Value'], 'genderConf':round(resp['FaceDetails'][0]['Gender']['Confidence'], 2), 'mustache':resp['FaceDetails'][0]['Mustache']['Value'], 'sunglasses':resp['FaceDetails'][0]['Sunglasses']['Value']})
 
     else :
         print "[-] No faces detected..."
