@@ -19,7 +19,7 @@ You will then need to rekognition to know who is who. Around 3-5 images per pers
 <li><code>python /home/pi/smartdb/scripts/add_faces.py -i 'imagename.jpg' -c 'collectionName' -l 'name'</code></li>
 
 
-<strong>Files</bstrong>
+<b>Files</b>
 
 install.sh - will install all dependencies as well as set permissions
 
@@ -27,5 +27,4 @@ hook.py - a flask app that will run when a GET query is made to 0.0.0.0:5000 and
 
 takepicture.py - snaps a photo and sends to aws rekognition to identify and post results to webcore
 
-hoo.service - a guincorn daemon that will run the hook.py on the background
-...
+hook.service - a guincorn daemon that will run the hook.py on the background
