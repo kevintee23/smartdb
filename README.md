@@ -28,3 +28,24 @@ hook.py - a flask app that will run when a GET query is made to 0.0.0.0:5000 and
 takepicture.py - snaps a photo and sends to aws rekognition to identify and post results to webcore
 
 hook.service - a guincorn daemon that will run the hook.py on the background
+
+
+
+
+
+In Progress - Displaying image on browser for possible notification and casting.
+Using Monkey
+
+Install Monkey with below code:-
+
+wget -qO - http://apt.monkey-project.com/monkey.key | sudo apt-key add -
+
+sudo nano /etc/apt/sources.list
+
+enter the below:-
+
+deb http://apt.monkey-project.com/raspbian jessie main
+
+sudo apt-get update
+
+sudo apt-get install monkey
