@@ -1,0 +1,7 @@
+<!doctype html>
+<title>Hello from Flask</title>
+{% if name %}
+  <img src=" {{url_for('static', filename=name)}}">
+{% else %}
+  <h1>Hello, World!</h1>
+{% endif %}
