@@ -26,9 +26,9 @@ echo '[+] Setting up permissions...'
 cd cameratest
 chmod +x takepicture.sh
 
-echo '[+] Creating media folderin smartdb folder...'
+echo '[+] Creating folder for captured pics...'
 cd
-mkdir /home/pi/smartdb/media
+mkdir /home/pi/smartdb/static
 
 echo '[+] Configure AWS...'
 aws configure
