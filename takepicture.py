@@ -23,7 +23,7 @@ def get_client():
 def take_picture(diskSpaceToReserve):
 	keepDiskSpaceFree(diskSpaceToReserve)
 	time = datetime.now()
-	filename = "/home/pi/test/media/capture-%04d%02d%02d-%02d%02d%02d.jpg" % (time.year, time.month, time.day, time.hour, time.minute, time.second)
+	filename = "/home/pi/smartdb/static/capture-%04d%02d%02d-%02d%02d%02d.jpg" % (time.year, time.month, time.day, time.hour, time.minute, time.second)
 
 	print '[+] A photo is being taken now...'
 
