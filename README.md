@@ -27,5 +27,5 @@ hook.py - a flask app that will run when a GET query is made to 0.0.0.0:5000 and
 
 takepicture.py - snaps a photo and sends to aws rekognition to identify and post results to webcore
 
-hook.service - a guincorn daemon that will run the hook.py on the background
+gunicorn.service - a guincorn daemon that will run the hook.py on the background
 
