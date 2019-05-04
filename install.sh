@@ -24,7 +24,7 @@ sudo cp /home/pi/smartdb/gunicorn.service /etc/systemd/system/
 
 echo '[+] Setting up permissions...'
 cd smartdb
-chmod +x takepicture.sh
+chmod +x takepicture.py
 
 echo '[+] Creating folder for captured pics...'
 cd
