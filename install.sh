@@ -10,13 +10,16 @@ echo '[+] Installing and updating core dependencies...'
 sudo apt-get update && sudo apt-get -y upgrade
 
 echo '[+] Installing pip, gunicorn and AWS CLI...'
-sudo apt-get install python-pip gunicorn python-requests awscli
+sudo apt-get install python-pip gunicorn awscli
+
+echo '[+] Installing requests...'
+python -m pip install --user requests
 
 echo '[+] Installing flask...'
 sudo pip install flask
 
 echo '[+] Installing required packages...'
-sudo pip install boto3 watchdog simplejson ordereddict
+sudo pip install boto3 watchdog simplejson
 rm -rf ~/.cache/pip
 
 echo '[+] Cloning gunicorn service file to the appropriate folder'
@@ -30,7 +33,4 @@ echo '[+] Creating folder for captured pics...'
 cd
 mkdir /home/pi/smartdb/static
 
-echo '[+] Configure AWS...'
-aws configure
-
-echo 'May the force be with you...'
+echo 'You will now need to manually configure AWS. To do this, type in aws configure...'
