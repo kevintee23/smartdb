@@ -16,7 +16,7 @@ echo '[+] Installing flask...'
 sudo pip install flask
 
 echo '[+] Installing required packages...'
-sudo pip install boto3 watchdog simplejson
+sudo pip install boto3 watchdog simplejson ordereddict
 rm -rf ~/.cache/pip
 
 echo '[+] Cloning gunicorn service file to the appropriate folder'
