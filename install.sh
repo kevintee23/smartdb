@@ -25,13 +25,13 @@ rm -rf ~/.cache/pip
 echo '[+] Cloning gunicorn service file to the appropriate folder'
 sudo cp /home/pi/smartdb/gunicorn.service /etc/systemd/system/
 
+echo '[+] Creating folder for captured pics...'
+cd
+mkdir /home/pi/smartdb/static
+
 echo '[+] Setting up permissions...'
 cd smartdb
 chmod +x takepicture.py
 sudo chown -R pi:pi /home/pi/smartdb/*
-
-echo '[+] Creating folder for captured pics...'
-cd
-mkdir /home/pi/smartdb/static
 
 echo 'You will now need to manually configure AWS. To do this, type in aws configure...'
