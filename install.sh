@@ -23,7 +23,7 @@ echo '[+] Cloning gunicorn service file to the appropriate folder'
 sudo cp /home/pi/smartdb/gunicorn.service /etc/systemd/system/
 
 echo '[+] Setting up permissions...'
-cd cameratest
+cd smartdb
 chmod +x takepicture.sh
 
 echo '[+] Creating folder for captured pics...'
