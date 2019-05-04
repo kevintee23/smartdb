@@ -1,8 +1,8 @@
 #!/bin/bash
 
-# Install script for cameraTest
+# Install script for smart Doorbell
 # by de_man
-# 23/4/2019
+# 4/5/2019
 
 cd
 
