@@ -20,7 +20,7 @@ sudo pip install boto3 watchdog simplejson PiCamera
 rm -rf ~/.cache/pip
 
 echo '[+] Cloning gunicorn service file to the appropriate folder'
-sudo cp /home/pi/cameraTest/cameraTest.service /etc/systemd/system/
+sudo cp /home/pi/smartdb/gunicorn.service /etc/systemd/system/
 
 echo '[+] Setting up permissions...'
 cd cameratest
