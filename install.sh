@@ -10,13 +10,13 @@ echo '[+] Installing and updating core dependencies...'
 sudo apt-get update && sudo apt-get -y upgrade
 
 echo '[+] Installing pip, gunicorn and AWS CLI...'
-sudo apt-get install python-pip gunicorn awscli
+sudo apt-get install python-pip gunicorn python-requests awscli
 
 echo '[+] Installing flask...'
 sudo pip install flask
 
 echo '[+] Installing required packages...'
-sudo pip install boto3 watchdog simplejson PiCamera
+sudo pip install boto3 watchdog simplejson
 rm -rf ~/.cache/pip
 
 echo '[+] Cloning gunicorn service file to the appropriate folder'
