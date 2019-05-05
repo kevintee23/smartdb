@@ -52,7 +52,7 @@ echo "
 INFO  : $STATUS Installing Flask webserver...
 -------------------------------------------------------------
 "
-sudo pip install flask
+sudo python -m pip install flask
 
 echo "
 -------------------------------------------------------------
@@ -73,7 +73,7 @@ echo "
 INFO  : $STATUS Installing simplejson...
 -------------------------------------------------------------
 "
-sudo pip install simplejson
+sudo python -m pip install simplejson
 rm -rf ~/.cache/pip
 
 echo "
