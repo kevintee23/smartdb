@@ -14,6 +14,7 @@ sudo apt-get install python-pip gunicorn awscli
 
 echo '[+] Installing requests...'
 python -m pip install --user requests
+python -m pip install --user urllib3
 
 echo '[+] Installing flask...'
 sudo pip install flask
