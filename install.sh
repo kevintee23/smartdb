@@ -9,18 +9,32 @@ cd
 echo '[+] Installing and updating core dependencies...'
 sudo apt-get update && sudo apt-get -y upgrade
 
-echo '[+] Installing pip, gunicorn and AWS CLI...'
-sudo apt-get install python-pip gunicorn awscli
+echo '[+] Freeing up space. Removing Wolfram-Engine...'
+sudo apt-get purge wolfram-engine
 
-echo '[+] Installing requests...'
-python -m pip install --user requests
-python -m pip install --user urllib3
+echo '[+] Installing python related dependencies...'
+sudo apt-get install -yq python-picamera
+sudo apt-get install -yq python3-picamera
+sudo apt-get install -yq python-pip
+sudo apt-get install -yq python3-pip
+
+echo '[+] Installing gunicorn...'
+sudo apt-get install gunicorn
+
+echo '[+] Installing AWS CLI...'
+sudo apt-get install awscli
 
 echo '[+] Installing flask...'
 sudo pip install flask
 
-echo '[+] Installing required packages...'
-sudo pip install boto3 watchdog simplejson
+echo '[+] Installing required packages - boto3...'
+sudo pip install boto3
+
+echo '[+] Installing required packages - watchdog...'
+sudo pip install watchdog
+
+echo '[+] Installing required packages - simplejson...'
+sudo pip install simplejson
 rm -rf ~/.cache/pip
 
 echo '[+] Cloning gunicorn service file to the appropriate folder'
@@ -31,8 +45,9 @@ cd
 mkdir /home/pi/smartdb/static
 
 echo '[+] Setting up permissions...'
-cd smartdb
-chmod +x takepicture.py
+chmod +x /home/pi/smartdb/takepicture.py
 sudo chown -R pi:pi /home/pi/smartdb/*
 
 echo 'You will now need to manually configure AWS. To do this, type in aws configure...'
+
+exit 0
