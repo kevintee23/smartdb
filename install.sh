@@ -42,7 +42,7 @@ sudo apt-get install gunicorn
 
 echo "
 -------------------------------------------------------------
-INFO  : $STATUS Installing AWS CLI for photo rekognition...
+INFO  : $STATUS Installing AWS CLI...
 -------------------------------------------------------------
 "
 sudo apt-get install awscli
@@ -56,21 +56,21 @@ sudo pip install flask
 
 echo "
 -------------------------------------------------------------
-INFO  : $STATUS Installing boto3, an AWS client...
+INFO  : $STATUS Installing boto3, the AWS rekognition client...
 -------------------------------------------------------------
 "
-sudo pip install boto3
+sudo python -m pip install boto3
 
 echo "
 -------------------------------------------------------------
-INFO  : $STATUS Installing watchdog...
+INFO  : $STATUS Installing requests...
 -------------------------------------------------------------
 "
-sudo pip install watchdog
+sudo python -m pip install requests
 
 echo "
 -------------------------------------------------------------
-INFO  : $STATUS Installing simplejson, to POST stuff...
+INFO  : $STATUS Installing simplejson...
 -------------------------------------------------------------
 "
 sudo pip install simplejson
