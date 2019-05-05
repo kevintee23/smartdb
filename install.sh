@@ -6,48 +6,113 @@
 
 cd
 
-echo '[+] Installing and updating core dependencies...'
+echo "
+-------------------------------------------------------------
+INFO  : Installing and updating core dependencies...
+-------------------------------------------------------------
+"
 sudo apt-get update && sudo apt-get -y upgrade
 
-echo '[+] Freeing up space. Removing Wolfram-Engine...'
+echo "
+-------------------------------------------------------------
+INFO  : $STATUS Freeing up space. Removing Wolfram-Engine...
+-------------------------------------------------------------
+"
 sudo apt-get purge wolfram-engine
 
-echo '[+] Installing python related dependencies...'
-sudo apt-get install -yq python-picamera
-sudo apt-get install -yq python3-picamera
-sudo apt-get install -yq python-pip
-sudo apt-get install -yq python3-pip
+#echo '[+] Installing python related dependencies...'
+#sudo apt-get install -yq python-picamera
+#sudo apt-get install -yq python3-picamera
 
-echo '[+] Installing gunicorn...'
+echo "
+-------------------------------------------------------------
+INFO  : $STATUS Installing pip from pypa.io...
+-------------------------------------------------------------
+"
+wget https://bootstrap.pypa.io/get-pip.py
+sudo python get-pip.py
+sudo python3 get-pip.py
+
+echo "
+---------------------------------------------------------------------
+INFO  : $STATUS Installing gunicorn, cause who doesn't love unicorns!
+---------------------------------------------------------------------
+"
 sudo apt-get install gunicorn
 
-echo '[+] Installing AWS CLI...'
+echo "
+-------------------------------------------------------------
+INFO  : $STATUS Installing AWS CLI for photo rekognition...
+-------------------------------------------------------------
+"
 sudo apt-get install awscli
 
-echo '[+] Installing flask...'
+echo "
+-------------------------------------------------------------
+INFO  : $STATUS Installing Flask webserver...
+-------------------------------------------------------------
+"
 sudo pip install flask
 
-echo '[+] Installing required packages - boto3...'
+echo "
+-------------------------------------------------------------
+INFO  : $STATUS Installing boto3, an AWS client...
+-------------------------------------------------------------
+"
 sudo pip install boto3
 
-echo '[+] Installing required packages - watchdog...'
+echo "
+-------------------------------------------------------------
+INFO  : $STATUS Installing watchdog...
+-------------------------------------------------------------
+"
 sudo pip install watchdog
 
-echo '[+] Installing required packages - simplejson...'
+echo "
+-------------------------------------------------------------
+INFO  : $STATUS Installing simplejson, to POST stuff...
+-------------------------------------------------------------
+"
 sudo pip install simplejson
 rm -rf ~/.cache/pip
 
-echo '[+] Cloning gunicorn service file to the appropriate folder'
+echo "
+-------------------------------------------------------------
+INFO  : Cloning gunicorn service filr to the appropriate folder
+-------------------------------------------------------------
+"
 sudo cp /home/pi/smartdb/gunicorn.service /etc/systemd/system/
 
-echo '[+] Creating folder for captured pics...'
+echo "
+-------------------------------------------------------------
+INFO  : Creating a folder for all your pictures...
+-------------------------------------------------------------
+"
 cd
 mkdir /home/pi/smartdb/static
 
-echo '[+] Setting up permissions...'
+echo "
+-------------------------------------------------------------
+INFO  : Setting up permissions...
+-------------------------------------------------------------
+"
 chmod +x /home/pi/smartdb/takepicture.py
 sudo chown -R pi:pi /home/pi/smartdb/*
 
-echo 'You will now need to manually configure AWS. To do this, type in aws configure...'
+echo "
+-------------------------------------------------------------
+INFO  : $STATUS Complete...
+-------------------------------------------------------------
+A few things before you start.
+
+1 - setup your AWS settings by typing in 'aws configure' on your terminal screen.
+
+2 - Activate your raspberry pi camera by typing on terminal:-
+    - sudo raspi-config
+    - go to 'Interfacing Options'
+    - Select P1 Camera
+    - Select Yes to enable it
+    - system will reboot
+"
 
 exit 0
