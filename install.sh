@@ -122,8 +122,8 @@ A few things before you start.
     - system will reboot
     
 3 - To check if the service is running in the background, so that the service will keep on running when you exit terminal,
-    type in 'systemctl status gunicorn'. You should see that some messages that say 'Active: active (running). If it is not
-    for some reason, run the following command:-
+    type in 'ps -ef | grep gunicorn'. You should see that some messages that say 
+    '/usr/bin/python /usr/bin/gunicorn -b 0.0.0.0:5000'. If it is not for some reason, run the following command:-
     - sudo systemctl daemon-reload
     - sudo systemctl start gunicorn
     - sudo systemctl enable gunicorn
