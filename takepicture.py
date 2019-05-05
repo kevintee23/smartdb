@@ -2,12 +2,11 @@
 
 import boto3 as b3
 import StringIO
-from argparse import ArgumentParser
+#from argparse import ArgumentParser
 from time import gmtime, strftime
 import requests
 from collections import OrderedDict
 import json
-from picamera import PiCamera
 import os
 import time
 import subprocess
@@ -47,11 +46,11 @@ def getFreeSpace():
 	du = st.f_bavail * st.f_frsize
     	return du
 	
-def get_args():
-    parser = ArgumentParser(description='Compare an image')
-    parser.add_argument('-i', '--image')
-    parser.add_argument('-c', '--collection')
-    return parser.parse_args()
+#def get_args():
+    #parser = ArgumentParser(description='Compare an image')
+    #parser.add_argument('-i', '--image')
+    #parser.add_argument('-c', '--collection')
+    #return parser.parse_args()
 
 #To check if the image has a face and capture all facial attributes
 def check_face(client, file):
@@ -78,7 +77,7 @@ def check_matches(client, file, collection):
     return face_matches, response
 
 def main():
-    args = get_args()
+    #args = get_args()
     client = get_client()
     imageFile = take_picture(diskSpaceToReserve)
     url = 'https://graph-eu01-euwest1.api.smartthings.com/api/token/c2803a67-4113-461d-ab6f-86f6dc2fb83b/smartapps/installations/4f0cc750-2e01-4ef1-a74e-39621749016a/execute/:b7c8603f323b84d7c8a10ba49ff677a2:'
