@@ -2,7 +2,6 @@
 
 import boto3 as b3
 import StringIO
-#from argparse import ArgumentParser
 from time import gmtime, strftime
 import requests
 from collections import OrderedDict
@@ -45,12 +44,6 @@ def getFreeSpace():
 	st = os.statvfs(".")
 	du = st.f_bavail * st.f_frsize
     	return du
-	
-#def get_args():
-    #parser = ArgumentParser(description='Compare an image')
-    #parser.add_argument('-i', '--image')
-    #parser.add_argument('-c', '--collection')
-    #return parser.parse_args()
 
 #To check if the image has a face and capture all facial attributes
 def check_face(client, file):
@@ -65,7 +58,7 @@ def check_face(client, file):
     return face_detected, response
 
 #Check if there is any faces that match the collection
-def check_matches(client, file, collection):
+def check_matches(client, file):
     face_matches = False
     with open(file, 'rb') as image:
         response = client.search_faces_by_image(CollectionId='myfamily', Image={'Bytes': image.read()}, MaxFaces=1, FaceMatchThreshold=85)
