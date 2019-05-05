@@ -20,9 +20,6 @@ INFO  : $STATUS Freeing up space. Removing Wolfram-Engine...
 "
 sudo apt-get purge wolfram-engine
 
-#echo '[+] Installing python related dependencies...'
-#sudo apt-get install -yq python-picamera
-#sudo apt-get install -yq python3-picamera
 
 echo "
 -------------------------------------------------------------
@@ -38,14 +35,14 @@ echo "
 INFO  : $STATUS Installing gunicorn, cause who doesn't love unicorns!
 ---------------------------------------------------------------------
 "
-sudo apt-get install gunicorn
+sudo apt-get install -y gunicorn
 
 echo "
 -------------------------------------------------------------
 INFO  : $STATUS Installing AWS CLI...
 -------------------------------------------------------------
 "
-sudo apt-get install awscli
+sudo apt-get install -y awscli
 
 echo "
 -------------------------------------------------------------
@@ -101,7 +98,17 @@ sudo chown -R pi:pi /home/pi/smartdb/*
 
 echo "
 -------------------------------------------------------------
-INFO  : $STATUS Complete...
+INFO  : Setting up daemon to run in the background...
+-------------------------------------------------------------
+"
+cd
+sudo systemctl daemon-reload
+sudo systemctl start gunicorn
+sudo systemctl enable gunicorn
+
+echo "
+-------------------------------------------------------------
+INFO  : $STATUS Completed!! Just a few more things...
 -------------------------------------------------------------
 A few things before you start.
 
@@ -113,6 +120,13 @@ A few things before you start.
     - Select P1 Camera
     - Select Yes to enable it
     - system will reboot
+    
+3 - To check if the service is running in the background, so that the service will keep on running when you exit terminal,
+    type in 'systemctl status gunicorn'. You should see that some messages that say 'Active: active (running). If it is not
+    for some reason, run the following command:-
+    - sudo systemctl daemon-reload
+    - sudo systemctl start gunicorn
+    - sudo systemctl enable gunicorn
 "
 
 exit 0
