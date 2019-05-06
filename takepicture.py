@@ -74,7 +74,9 @@ def main():
     client = get_client()
     imageFile = take_picture(diskSpaceToReserve)
     files = {"attachment": ("image.jpg", open(imageFile, "rb"), "image/jpeg")}
-    imageURL = imageFile.replace("/home/pi/smartdb/", "http://10.14.122.66/")
+    imageURL = imageFile.replace("/home/pi/smartdb/", "http://10.14.122.66:5000/")
+    #POtoken = <your Pushover Token>
+    #POuser = <your Pushover User Key>
     url = 'https://graph-eu01-euwest1.api.smartthings.com/api/token/c2803a67-4113-461d-ab6f-86f6dc2fb83b/smartapps/installations/4f0cc750-2e01-4ef1-a74e-39621749016a/execute/:b7c8603f323b84d7c8a10ba49ff677a2:'
     
     print '[+] Getting things started...'
@@ -91,13 +93,15 @@ def main():
         if (resu):
             print '[+] Identity matched %s with %r similarity and %r confidence...' % (res['FaceMatches'][0]['Face']['ExternalImageId'], round(res['FaceMatches'][0]['Similarity'], 1), round(res['FaceMatches'][0]['Face']['Confidence'], 2))
             r = requests.post(url, data={'person':res['FaceMatches'][0]['Face']['ExternalImageId'], 'similarity':round(res['FaceMatches'][0]['Similarity'], 2), 'confidence':round(res['FaceMatches'][0]['Face']['Confidence'], 2), 'faceConfidence':round(resp['FaceDetails'][0]['Confidence'], 2), 'ageHigh':resp['FaceDetails'][0]['AgeRange']['High'], 'ageLow':resp['FaceDetails'][0]['AgeRange']['Low'], 'gender':resp['FaceDetails'][0]['Gender']['Value'], 'genderConf':round(resp['FaceDetails'][0]['Gender']['Confidence'], 2), 'mustache':resp['FaceDetails'][0]['Mustache']['Value'], 'sunglasses':resp['FaceDetails'][0]['Sunglasses']['Value']})
+	    #r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": "agpjf2unwji4jdozretwkcwh89jo7n", "user": "uxqAujkeFN5g1btLFoQHpnkRXM5DNX", "message": imageURL}, files = files)
         else:
             print '[-] No face matches detected...'
             r = requests.post(url, data={'person':'Unknown', 'faceConfidence':round(resp['FaceDetails'][0]['Confidence'], 2), 'ageHigh':resp['FaceDetails'][0]['AgeRange']['High'], 'ageLow':resp['FaceDetails'][0]['AgeRange']['Low'], 'gender':resp['FaceDetails'][0]['Gender']['Value'], 'genderConf':round(resp['FaceDetails'][0]['Gender']['Confidence'], 2), 'mustache':resp['FaceDetails'][0]['Mustache']['Value'], 'sunglasses':resp['FaceDetails'][0]['Sunglasses']['Value']})
+	    #r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
 
     else :
         print "[-] No faces detected..."
-	r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": "agpjf2unwji4jdozretwkcwh89jo7n", "user": "uxqAujkeFN5g1btLFoQHpnkRXM5DNX", "message": imageURL}, files = files)
+	#r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": "agpjf2unwji4jdozretwkcwh89jo7n", "user": "uxqAujkeFN5g1btLFoQHpnkRXM5DNX", "message": imageURL}, files = files)
         
 if __name__ == '__main__':
     main()
