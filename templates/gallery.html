@@ -1,0 +1,14 @@
+<!DOCTYPE=html>
+<html>
+<head>
+    <title>
+        Media Gallery
+    </title>
+</head>
+<body>
+    {{first_event}} Image Captures {{second_event}}
+    {% for hist in hists %}
+    <li><a href="{{url_for('static', filename=hist)}}">{{hist}}</a></li>
+    {% endfor %}
+</body>
+</html>`
