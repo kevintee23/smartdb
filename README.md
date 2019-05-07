@@ -45,3 +45,12 @@ takepicture.py - snaps a photo and sends to aws rekognition to identify and post
 
 gunicorn.service - a guincorn daemon that will run the hook.py on the background
 
+
+<b>About Saved Snapshots</b>
+
+The pictures that the camera captures will be appropriately named based on the time of capture. To ensure that it makes sense and is local to you, you will need to update your time on your RPI. To do this:-
+
+<li><code>sudo raspi-config</code><li>
+  
+  From there, go to the Localization Options and select your timezone. Once that is done, the captured images will let you know when the picture was taken.
+
