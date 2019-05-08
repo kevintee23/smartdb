@@ -2,7 +2,12 @@
 
 # Install script for smart Doorbell
 # by de_man
+# Run this script on /home/pi folder only
 # 4/5/2019
+
+#Informational only, getting your IP Address
+ip=$(hostname -I | cut -f1 --delimiter=' ')
+echo "Your Raspberry Pi IP Address is $ip"
 
 cd
 
@@ -18,8 +23,20 @@ echo "
 INFO  : $STATUS Freeing up space. Removing Wolfram-Engine...
 -------------------------------------------------------------
 "
-sudo apt-get purge wolfram-engine
+wolfram="y"
+nowolfram="y"
+echo "Would you like to free up some space by removing the Wolfram-Engine?"
+read "Perform space saver routine? Enter y for yes or n for no (default= $wolfram): " nowolfram
+[ -n "$nowolfram" ] && wolfram=$nowolfram
 
+if [ "$wolfram" = "y" ];
+then
+    echo "Removing Wolfram-Engine..."
+    sudo apt-get purge wolfram-engine
+else
+    echo "Skipping this step and moving on..."
+    
+fi
 
 echo "
 -------------------------------------------------------------
@@ -75,9 +92,12 @@ rm -rf ~/.cache/pip
 
 echo "
 -------------------------------------------------------------
-INFO  : Cloning gunicorn service filr to the appropriate folder
+INFO  : Cloning gunicorn service file to the appropriate folder
 -------------------------------------------------------------
 "
+cd home/pi/smartdb
+sudo chmod 755 gunicorn.service
+cd
 sudo cp /home/pi/smartdb/gunicorn.service /etc/systemd/system/
 
 echo "
@@ -101,10 +121,12 @@ echo "
 INFO  : Setting up daemon to run in the background...
 -------------------------------------------------------------
 "
-cd
+cd /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl start gunicorn
 sudo systemctl enable gunicorn
+
+fi
 
 echo "
 -------------------------------------------------------------
