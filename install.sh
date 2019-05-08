@@ -5,6 +5,8 @@
 # Run this script on /home/pi folder only
 # 4/5/2019
 
+#wgethttps://raw.githubusercontent.com/kevintee23/smartdb/master/install.sh
+
 #Informational only, getting your IP Address
 ip=$(hostname -I | cut -f1 --delimiter=' ')
 echo "Your Raspberry Pi IP Address is $ip"
