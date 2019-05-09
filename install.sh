@@ -105,20 +105,40 @@ rm -rf ~/.cache/pip
 
 echo "$Cyan
 -------------------------------------------------------------
-INFO  : Copying folders over...
+INFO  : Creating and Copying folders over...
 -------------------------------------------------------------
 $Color_Off"
+
+cd ~
+mkdir /home/pi/smartdb
+echo '$Cyan /home/pi/smartdb created... $Color_Off'
+mkdir /home/pi/smartdb/templates
+mkdir /home/pi/smartdb/scripts
+mkdir /home/pi/smartdb/static
+cd ~
+cd /home/pi/smartdb
 wget -O gunicorn.service -q --show-progress https://raw.github.com/kevintee23/smartdb/master/gunicorn.service
 wget -O hook.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/hook.py
 wget -O takepicture.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/takepicture.py
-wget -O templates/gallery.html -q --show-progress https://raw.github.com/kevintee23/smartdb/master/templates/gallery.html
-wget -O templates/picture.html -q --show-progress https://raw.github.com/kevintee23/smartdb/master/templates/picture.html
-wget -O scripts/add_collection.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/add_collection.py
-wget -O scripts/add_image.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/add_image.py
-wget -O scripts/del_collections.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/del_collections.py
-wget -O scripts/del_faces.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/del_faces.py
 wget -O README.md -q --show-progress https://raw.github.com/kevintee23/smartdb/master/README.md
+cd ~
+cd /home/pi/smartdb/templates
+wget -O gallery.html -q --show-progress https://raw.github.com/kevintee23/smartdb/master/templates/gallery.html
+wget -O picture.html -q --show-progress https://raw.github.com/kevintee23/smartdb/master/templates/picture.html
+cd ~
+cd /home/pi/smartdb/scripts
+wget -O add_collection.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/add_collection.py
+wget -O add_image.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/add_image.py
+wget -O del_collections.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/del_collections.py
+wget -O del_faces.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/del_faces.py
 
+echo "$Cyan
+-------------------------------------------------------------
+INFO  : Setting up permissions...
+-------------------------------------------------------------
+$Color_Off"
+chmod +x /home/pi/smartdb/takepicture.py
+sudo chown -R pi:pi /home/pi/smartdb/*
 
 echo "$Cyan
 -------------------------------------------------------------
@@ -130,21 +150,6 @@ sudo chmod 755 gunicorn.service
 cd
 sudo cp /home/pi/smartdb/gunicorn.service /etc/systemd/system/
 
-echo "$Cyan
--------------------------------------------------------------
-INFO  : Creating a folder for all your pictures...
--------------------------------------------------------------
-$Color_Off"
-cd
-mkdir /home/pi/smartdb/static
-
-echo "$Cyan
--------------------------------------------------------------
-INFO  : Setting up permissions...
--------------------------------------------------------------
-$Color_Off"
-chmod +x /home/pi/smartdb/takepicture.py
-sudo chown -R pi:pi /home/pi/smartdb/*
 
 echo "$Cyan
 -------------------------------------------------------------
