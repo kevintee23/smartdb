@@ -7,111 +7,88 @@
 
 #wget https://raw.githubusercontent.com/kevintee23/smartdb/master/install.sh
 
-#COLORS
-# Reset
-Color_Off='\033[0m'       # Text Reset
-
-# Regular Colors
-Red='\033[0;31m'          # Red
-Green='\033[0;32m'        # Green
-Yellow='\033[0;33m'       # Yellow
-Purple='\033[0;35m'       # Purple
-Cyan='\033[0;36m'         # Cyan
-
 #Informational only, getting your IP Address
 ip=$(hostname -I | cut -f1 --delimiter=' ')
 echo "Your Raspberry Pi IP Address is $ip"
 
 cd
 
-echo "$Cyan
+echo "
 -------------------------------------------------------------
 INFO  : Installing and updating core dependencies...
 -------------------------------------------------------------
-$Color_Off"
+"
 sudo apt-get update && sudo apt-get -y upgrade
 
-echo "$Cyan
--------------------------------------------------------------
-INFO  : $STATUS Freeing up space. Removing Wolfram-Engine...
--------------------------------------------------------------
-$Color_Off"
-wolfram="y"
-nowolfram="y"
-echo "$Green Would you like to free up some space by removing the Wolfram-Engine? $Color_Off"
-read "Perform space saver routine? Enter y for yes or n for no (default= $wolfram): " nowolfram
-[ -n "$nowolfram" ] && wolfram=$nowolfram
 
-if [ "$wolfram" = "y" ];
-then
-    echo "$Cyan Removing Wolfram-Engine... $Color_Off"
-    sudo apt-get purge wolfram-engine
-else
-    echo "$Cyan Skipping this step and moving on... $Color_Off"
-    
-fi
-
-echo "$Cyan
+echo "
 -------------------------------------------------------------
 INFO  : $STATUS Installing pip from pypa.io...
 -------------------------------------------------------------
-$Color_Off"
+"
 wget https://bootstrap.pypa.io/get-pip.py
 sudo python get-pip.py
 sudo python3 get-pip.py
 
-echo "$Cyan
+
+echo "
 ---------------------------------------------------------------------
 INFO  : $STATUS Installing gunicorn, cause who doesn't love unicorns!
 ---------------------------------------------------------------------
-$Color_Off"
+"
 sudo apt-get install -y gunicorn
 
-echo "$Cyan
+
+echo "
 -------------------------------------------------------------
 INFO  : $STATUS Installing AWS CLI...
 -------------------------------------------------------------
-$Color_Off"
+"
 sudo apt-get install -y awscli
 
-echo "$Cyan
+
+echo "
 -------------------------------------------------------------
 INFO  : $STATUS Installing Flask webserver...
 -------------------------------------------------------------
-$Color_Off"
+"
 sudo python -m pip install flask
 
-echo "$Cyan
+
+echo "
 -------------------------------------------------------------
 INFO  : $STATUS Installing boto3, the AWS rekognition client...
 -------------------------------------------------------------
-$Color_Off"
+"
 sudo python -m pip install boto3
 
-echo "$Cyan
+
+echo "
 -------------------------------------------------------------
 INFO  : $STATUS Installing requests...
 -------------------------------------------------------------
-$Color_Off"
+"
 sudo python -m pip install requests
 
-echo "$Cyan
+
+echo "
 -------------------------------------------------------------
 INFO  : $STATUS Installing simplejson...
 -------------------------------------------------------------
-$Color_Off"
+"
 sudo python -m pip install simplejson
 rm -rf ~/.cache/pip
 
-echo "$Cyan
+
+echo "
 -------------------------------------------------------------
 INFO  : Creating and Copying folders over...
 -------------------------------------------------------------
-$Color_Off"
+"
 
 cd ~
 mkdir /home/pi/smartdb
-echo '$Cyan /home/pi/smartdb created... $Color_Off'
+echo '[+] /home/pi/smartdb folders have been created...'
 mkdir /home/pi/smartdb/templates
 mkdir /home/pi/smartdb/scripts
 mkdir /home/pi/smartdb/static
@@ -132,38 +109,50 @@ wget -O add_image.py -q --show-progress https://raw.github.com/kevintee23/smartd
 wget -O del_collections.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/del_collections.py
 wget -O del_faces.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/del_faces.py
 
-echo "$Cyan
+echo "
 -------------------------------------------------------------
 INFO  : Setting up permissions...
 -------------------------------------------------------------
-$Color_Off"
+"
 chmod +x /home/pi/smartdb/takepicture.py
 sudo chown -R pi:pi /home/pi/smartdb/*
+echo '[+] Permissions have been configured...'
 
-echo "$Cyan
+
+echo "
 -------------------------------------------------------------
 INFO  : Cloning gunicorn service file to the appropriate folder
 -------------------------------------------------------------
-$Color_Off"
-cd home/pi/smartdb
+"
+cd ~
+cd /home/pi/smartdb
 sudo chmod 755 gunicorn.service
 cd
 sudo cp /home/pi/smartdb/gunicorn.service /etc/systemd/system/
 
 
-echo "$Cyan
+echo "
 -------------------------------------------------------------
 INFO  : Setting up daemon to run in the background...
 -------------------------------------------------------------
-$Color_Off"
+"
 cd /etc/systemd/system
 sudo systemctl daemon-reload
 sudo systemctl start gunicorn
 sudo systemctl enable gunicorn
 
-fi
 
-echo "$Cyan
+echo "
+-------------------------------------------------------------
+INFO  : Leaning up old system files...
+-------------------------------------------------------------
+"
+cd ~
+rm -v install.sh
+rm -v get-pip.py
+
+
+echo "
 -------------------------------------------------------------
 INFO  : $STATUS Completed!! Just a few more things...
 -------------------------------------------------------------
@@ -184,6 +173,6 @@ A few things before you start.
     - sudo systemctl daemon-reload
     - sudo systemctl start gunicorn
     - sudo systemctl enable gunicorn
-$Color_Off"
+"
 
 exit 0
