@@ -22,12 +22,6 @@ Cyan='\033[0;36m'         # Cyan
 ip=$(hostname -I | cut -f1 --delimiter=' ')
 echo "Your Raspberry Pi IP Address is $ip"
 
-echo "-----------------------------"
-echo "IP Addresses on This Computer"
-echo "-----------------------------"
-ifconfig | grep 'inet ' | grep -v 127.0.0 | cut -d " " -f 12
-echo "---------- Done -------------"
-
 cd
 
 echo "$Cyan
