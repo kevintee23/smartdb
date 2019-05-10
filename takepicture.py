@@ -74,7 +74,8 @@ def main():
     client = get_client()
     imageFile = take_picture(diskSpaceToReserve)
     files = {"attachment": ("image.jpg", open(imageFile, "rb"), "image/jpeg")}
-    imageURL = imageFile.replace("/home/pi/smartdb/", "http://10.14.122.66:5000/")
+    ip=$(hostname -I | cut -f1 --delimiter=' ')
+    imageURL = imageFile.replace("/home/pi/smartdb/", "http://$ip:5000/")
     #POtoken = <your Pushover Token>
     #POuser = <your Pushover User Key>
     url = 'https://graph-eu01-euwest1.api.smartthings.com/api/token/c2803a67-4113-461d-ab6f-86f6dc2fb83b/smartapps/installations/4f0cc750-2e01-4ef1-a74e-39621749016a/execute/:b7c8603f323b84d7c8a10ba49ff677a2:'
