@@ -7,6 +7,7 @@ import requests
 from collections import OrderedDict
 import json
 import os
+import socket
 import time
 import subprocess
 from datetime import datetime
@@ -73,9 +74,11 @@ def main():
     #args = get_args()
     client = get_client()
     imageFile = take_picture(diskSpaceToReserve)
+    s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+    s.connect(('8.8.8.8', 1))
+    host_ip = s.getsockname()[0]
     files = {"attachment": ("image.jpg", open(imageFile, "rb"), "image/jpeg")}
-    ip=$(hostname -I | cut -f1 --delimiter=' ')
-    imageURL = imageFile.replace("/home/pi/smartdb/", "http://$ip:5000/")
+    imageURL = imageFile.replace("/home/pi/smartdb/", "http://%s:5000/") % host_ip
     #POtoken = <your Pushover Token>
     #POuser = <your Pushover User Key>
     url = 'https://graph-eu01-euwest1.api.smartthings.com/api/token/c2803a67-4113-461d-ab6f-86f6dc2fb83b/smartapps/installations/4f0cc750-2e01-4ef1-a74e-39621749016a/execute/:b7c8603f323b84d7c8a10ba49ff677a2:'
@@ -93,10 +96,12 @@ def main():
     
         if (resu):
             print '[+] Identity matched %s with %r similarity and %r confidence...' % (res['FaceMatches'][0]['Face']['ExternalImageId'], round(res['FaceMatches'][0]['Similarity'], 1), round(res['FaceMatches'][0]['Face']['Confidence'], 2))
+	    matchmsg = 'I am %r confident that i saw %s... - %s' % (round(res['FaceMatches'][0]['Similarity'], 1), res['FaceMatches'][0]['Face']['ExternalImageId']), imageURL
             r = requests.post(url, data={'person':res['FaceMatches'][0]['Face']['ExternalImageId'], 'similarity':round(res['FaceMatches'][0]['Similarity'], 2), 'confidence':round(res['FaceMatches'][0]['Face']['Confidence'], 2), 'faceConfidence':round(resp['FaceDetails'][0]['Confidence'], 2), 'ageHigh':resp['FaceDetails'][0]['AgeRange']['High'], 'ageLow':resp['FaceDetails'][0]['AgeRange']['Low'], 'gender':resp['FaceDetails'][0]['Gender']['Value'], 'genderConf':round(resp['FaceDetails'][0]['Gender']['Confidence'], 2), 'mustache':resp['FaceDetails'][0]['Mustache']['Value'], 'sunglasses':resp['FaceDetails'][0]['Sunglasses']['Value']})
 	    #r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": "agpjf2unwji4jdozretwkcwh89jo7n", "user": "uxqAujkeFN5g1btLFoQHpnkRXM5DNX", "message": imageURL}, files = files)
         else:
             print '[-] No face matches detected...'
+	    nomatchmsg = 'I detect a %s between the age of %s - %s. Mustache - %s, Sunglasses - %s... %s' % (resp['FaceDetails'][0]['Gender']['Value'], resp['FaceDetails'][0]['AgeRange']['Low'], resp['FaceDetails'][0]['AgeRange']['High'], resp['FaceDetails'][0]['Mustache']['Value'], resp['FaceDetails'][0]['Sunglasses']['Value']), imageURL
             r = requests.post(url, data={'person':'Unknown', 'faceConfidence':round(resp['FaceDetails'][0]['Confidence'], 2), 'ageHigh':resp['FaceDetails'][0]['AgeRange']['High'], 'ageLow':resp['FaceDetails'][0]['AgeRange']['Low'], 'gender':resp['FaceDetails'][0]['Gender']['Value'], 'genderConf':round(resp['FaceDetails'][0]['Gender']['Confidence'], 2), 'mustache':resp['FaceDetails'][0]['Mustache']['Value'], 'sunglasses':resp['FaceDetails'][0]['Sunglasses']['Value']})
 	    #r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
 
