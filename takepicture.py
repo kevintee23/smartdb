@@ -27,7 +27,7 @@ def take_picture(diskSpaceToReserve):
 
 	print '[+] A photo is being taken now...'
 
-	subprocess.call("raspistill -o %s --timeout 1 --nopreview --exposure sports -w 800 -h 600 -a 1036 +75+75" % filename, shell=True)
+	subprocess.call("raspistill -o %s --timeout 1 --nopreview --exposure sports -q 20 -vf -hf -a 1036 +75+75" % filename, shell=True)
 	print '[+] Your image was saved to %s...' % filename
 	return filename
 
@@ -110,7 +110,7 @@ def main():
     else :
         print "[-] No faces detected..."
 	r = requests.post(url, data={'person':'No'})
-	#r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
+	r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
         
 if __name__ == '__main__':
     main()
