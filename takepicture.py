@@ -78,8 +78,9 @@ def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(('8.8.8.8', 1))
     host_ip = s.getsockname()[0]
+    fport = config.fport
     files = {"attachment": ("image.jpg", open(imageFile, "rb"), "image/jpeg")}
-    imageURL = imageFile.replace("/home/pi/smartdb/", "http://%s:5000/") % host_ip
+    imageURL = imageFile.replace("/home/pi/smartdb/", "http://%s:%s/") % host_ip, fport
     POtoken = config.POtoken
     POuser = config.POuser
     url = config.wcurl
@@ -108,6 +109,7 @@ def main():
 
     else :
         print "[-] No faces detected..."
+	r = requests.post(url, data={'person':'No'})
 	#r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
         
 if __name__ == '__main__':
