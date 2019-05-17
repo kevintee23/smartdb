@@ -108,6 +108,9 @@ wget -O add_collection.py -q --show-progress https://raw.github.com/kevintee23/s
 wget -O add_image.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/add_image.py
 wget -O del_collections.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/del_collections.py
 wget -O del_faces.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/scripts/del_faces.py
+cd ~
+cd /home/pi/smartdb/static
+wget -O mysmartcave.jpg -q --show-progress https://raw.github.com/kevintee23/smartdb/master/static/mysmartcave.jpg
 
 echo "
 -------------------------------------------------------------
