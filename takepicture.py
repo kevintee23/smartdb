@@ -80,7 +80,7 @@ def main():
     host_ip = s.getsockname()[0]
     fport = config.fport
     files = {"attachment": ("image.jpg", open(imageFile, "rb"), "image/jpeg")}
-    imageURL = imageFile.replace("/home/pi/smartdb/", "http://%s:%s/") % host_ip, fport
+    imageURL = imageFile.replace("/home/pi/smartdb/", "http://%s:%s/") % (host_ip, fport)
     POtoken = config.POtoken
     POuser = config.POuser
     url = config.wcurl
