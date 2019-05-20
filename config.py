@@ -14,5 +14,5 @@ POtoken = "yourTokenHere"     # Your Pushover account Token ID
 POuser = "yourUserKey"        # Your Pushover User Key
 ifturl = "iftttUrlHere"       # Your IFTTT URL
 picQuality = 20               # Value range is between 10-100
-vlip = "-vf"                  # To vertical flip your picture enter "-vf", otherwise leave blank ("")
+vflip = "-vf"                  # To vertical flip your picture enter "-vf", otherwise leave blank ("")
 hflip = "-hf"                 # To horizontally flip your picture enter "-hf", otherwise leave blank ("")
