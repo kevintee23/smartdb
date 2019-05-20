@@ -119,7 +119,7 @@ def main():
     else :
         print "[-] No faces detected..."
 	#Command to send to webCoRE. Comment out the line below if not using webCoRE
-	r = requests.post(url, data={'event':'smartdb', 'person':'No'})
+	r = requests.post(wcurl, data={'event':'smartdb', 'person':'No'})
 	#Command to send to Pushover. Comment out the line below if not using Pushover
 	r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
         #Command to send to IFTTT. Comment out the line below if not using IFTTT
