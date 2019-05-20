@@ -30,7 +30,7 @@ def take_picture(diskSpaceToReserve):
 
 	print '[+] A photo is being taken now...'
 
-	subprocess.call("raspistill -o %s --timeout 1 --nopreview --exposure sports -q %s -a 1036 -ae +75+75 %s %s" % (quality, filename, vfip, hflip), shell=True)
+	subprocess.call("raspistill -o %s --timeout 1 --nopreview --exposure sports -q %s -a 1036 -ae +75+75 %s %s" % (quality, filename, vflip, hflip), shell=True)
 	print '[+] Your image was saved to %s...' % filename
 	return filename
 
