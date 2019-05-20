@@ -23,11 +23,14 @@ def get_client():
 def take_picture(diskSpaceToReserve):
 	keepDiskSpaceFree(diskSpaceToReserve)
 	time = datetime.now()
+	quality = config.picQuality
+	vflip = config.vflip
+	hflip = config.hflip
 	filename = "/home/pi/smartdb/static/capture-%04d%02d%02d-%02d%02d%02d.jpg" % (time.year, time.month, time.day, time.hour, time.minute, time.second)
 
 	print '[+] A photo is being taken now...'
 
-	subprocess.call("raspistill -o %s --timeout 1 --nopreview --exposure sports -q 20 -vf -hf -a 1036 -ae +75+75" % filename, shell=True)
+	subprocess.call("raspistill -o %s --timeout 1 --nopreview --exposure sports -q %s -a 1036 -ae +75+75 %s %s" % (quality, filename, vfip, hflip), shell=True)
 	print '[+] Your image was saved to %s...' % filename
 	return filename
 
