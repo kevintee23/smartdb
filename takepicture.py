@@ -105,7 +105,7 @@ def main():
 	    #Command to send to Pushover. Comment out the line below if not using Pushover
 	    r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
 	    #Command to send to IFTTT. Comment out the line below if not using IFTTT
-	    r = requests.post(ifturl, data={'event':'smartdb', 'value1':matchmsg, 'value2':imageURL}
+	    r = requests.post(ifturl, data={'event':'smartdb', 'value1':matchmsg, 'value2':imageURL})
         else:
             print '[-] No face matches detected...'
 	    nomatchmsg = 'I detect a %s between the age of %s - %s. Mustache - %s, Sunglasses - %s... %s' % (resp['FaceDetails'][0]['Gender']['Value'], resp['FaceDetails'][0]['AgeRange']['Low'], resp['FaceDetails'][0]['AgeRange']['High'], resp['FaceDetails'][0]['Mustache']['Value'], resp['FaceDetails'][0]['Sunglasses']['Value'], imageURL)
@@ -114,7 +114,7 @@ def main():
 	    #Command to send to Pushover. Comment out the line below if not using Pushover
 	    r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
 	    #Command to send to IFTTT. Comment out the line below if not using IFTTT
-	    r = requests.post(ifturl, data={'event'='smartdb', 'value1':nomatchmsg, 'value2':imageURL}
+	    r = requests.post(ifturl, data={'event'='smartdb', 'value1':nomatchmsg, 'value2':imageURL})
 
     else :
         print "[-] No faces detected..."
@@ -123,6 +123,6 @@ def main():
 	#Command to send to Pushover. Comment out the line below if not using Pushover
 	r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
         #Command to send to IFTTT. Comment out the line below if not using IFTTT
-	r = requests.post(ifturl, data={'event':'smartdb', 'value1':'No faces was detected', 'value2':imageURL}
+	r = requests.post(ifturl, data={'event':'smartdb', 'value1':'No faces was detected', 'value2':imageURL})
 if __name__ == '__main__':
     main()
