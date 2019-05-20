@@ -98,31 +98,31 @@ def main():
         resu, res = check_matches(client, imageFile)
     
         if (resu):
-            print '[+] Identity matched %s with %r similarity and %r confidence...' % (res['FaceMatches'][0]['Face']['ExternalImageId'], round(res['FaceMatches'][0]['Similarity'], 1), round(res['FaceMatches'][0]['Face']['Confidence'], 2))
+            print '[+] I am %r confident that i saw %s... - %s' % (round(res['FaceMatches'][0]['Similarity'], 1), res['FaceMatches'][0]['Face']['ExternalImageId'], imageURL)
 	    matchmsg = 'I am %r confident that i saw %s... - %s' % (round(res['FaceMatches'][0]['Similarity'], 1), res['FaceMatches'][0]['Face']['ExternalImageId'], imageURL)
-	    #Command to send to webCoRE. Comment out the line below if not using webCoRE
-            r = requests.post(wcurl, data={'person':res['FaceMatches'][0]['Face']['ExternalImageId'], 'similarity':round(res['FaceMatches'][0]['Similarity'], 2), 'confidence':round(res['FaceMatches'][0]['Face']['Confidence'], 2), 'faceConfidence':round(resp['FaceDetails'][0]['Confidence'], 2), 'ageHigh':resp['FaceDetails'][0]['AgeRange']['High'], 'ageLow':resp['FaceDetails'][0]['AgeRange']['Low'], 'gender':resp['FaceDetails'][0]['Gender']['Value'], 'genderConf':round(resp['FaceDetails'][0]['Gender']['Confidence'], 2), 'mustache':resp['FaceDetails'][0]['Mustache']['Value'], 'sunglasses':resp['FaceDetails'][0]['Sunglasses']['Value']})
-	    #Command to send to Pushover. Comment out the line below if not using Pushover
-	    r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
-	    #Command to send to IFTTT. Comment out the line below if not using IFTTT
-	    r = requests.post(ifturl, data={'event':'smartdb', 'value1':matchmsg, 'value2':imageURL})
+	 #Command to send to webCoRE. Comment in the line below if not using webCoRE
+            #r = requests.post(wcurl, data={'person':res['FaceMatches'][0]['Face']['ExternalImageId'], 'similarity':round(res['FaceMatches'][0]['Similarity'], 2), 'confidence':round(res['FaceMatches'][0]['Face']['Confidence'], 2), 'faceConfidence':round(resp['FaceDetails'][0]['Confidence'], 2), 'ageHigh':resp['FaceDetails'][0]['AgeRange']['High'], 'ageLow':resp['FaceDetails'][0]['AgeRange']['Low'], 'gender':resp['FaceDetails'][0]['Gender']['Value'], 'genderConf':round(resp['FaceDetails'][0]['Gender']['Confidence'], 2), 'mustache':resp['FaceDetails'][0]['Mustache']['Value'], 'sunglasses':resp['FaceDetails'][0]['Sunglasses']['Value']})
+	 #Command to send to Pushover. Comment in the line below if not using Pushover
+	    #r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
+	 #Command to send to IFTTT. Comment in the line below if not using IFTTT
+	    #r = requests.post(ifturl, data={'event':'smartdb', 'value1':matchmsg, 'value2':imageURL})
         else:
-            print '[-] No face matches detected...'
+            print '[-] I detect a %s between the age of %s - %s. Mustache - %s, Sunglasses - %s... %s' % (resp['FaceDetails'][0]['Gender']['Value'], resp['FaceDetails'][0]['AgeRange']['Low'], resp['FaceDetails'][0]['AgeRange']['High'], resp['FaceDetails'][0]['Mustache']['Value'], resp['FaceDetails'][0]['Sunglasses']['Value'], imageURL)
 	    nomatchmsg = 'I detect a %s between the age of %s - %s. Mustache - %s, Sunglasses - %s... %s' % (resp['FaceDetails'][0]['Gender']['Value'], resp['FaceDetails'][0]['AgeRange']['Low'], resp['FaceDetails'][0]['AgeRange']['High'], resp['FaceDetails'][0]['Mustache']['Value'], resp['FaceDetails'][0]['Sunglasses']['Value'], imageURL)
-	    #Command to send to webCoRE. Comment out the line below if not using webCoRE
-            r = requests.post(wcurl, data={'person':'Unknown', 'faceConfidence':round(resp['FaceDetails'][0]['Confidence'], 2), 'ageHigh':resp['FaceDetails'][0]['AgeRange']['High'], 'ageLow':resp['FaceDetails'][0]['AgeRange']['Low'], 'gender':resp['FaceDetails'][0]['Gender']['Value'], 'genderConf':round(resp['FaceDetails'][0]['Gender']['Confidence'], 2), 'mustache':resp['FaceDetails'][0]['Mustache']['Value'], 'sunglasses':resp['FaceDetails'][0]['Sunglasses']['Value']})
-	    #Command to send to Pushover. Comment out the line below if not using Pushover
-	    r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
-	    #Command to send to IFTTT. Comment out the line below if not using IFTTT
-	    r = requests.post(ifturl, data={'event':'smartdb', 'value1':nomatchmsg, 'value2':imageURL})
+	 #Command to send to webCoRE. Comment in the line below if not using webCoRE
+            #r = requests.post(wcurl, data={'person':'Unknown', 'faceConfidence':round(resp['FaceDetails'][0]['Confidence'], 2), 'ageHigh':resp['FaceDetails'][0]['AgeRange']['High'], 'ageLow':resp['FaceDetails'][0]['AgeRange']['Low'], 'gender':resp['FaceDetails'][0]['Gender']['Value'], 'genderConf':round(resp['FaceDetails'][0]['Gender']['Confidence'], 2), 'mustache':resp['FaceDetails'][0]['Mustache']['Value'], 'sunglasses':resp['FaceDetails'][0]['Sunglasses']['Value']})
+	 #Command to send to Pushover. Comment in the line below if not using Pushover
+	    #r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
+	 #Command to send to IFTTT. Comment in the line below if not using IFTTT
+	    #r = requests.post(ifturl, data={'event':'smartdb', 'value1':nomatchmsg, 'value2':imageURL})
 
     else :
         print "[-] No faces detected..."
-	#Command to send to webCoRE. Comment out the line below if not using webCoRE
-	r = requests.post(wcurl, data={'event':'smartdb', 'person':'No'})
-	#Command to send to Pushover. Comment out the line below if not using Pushover
-	r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
-        #Command to send to IFTTT. Comment out the line below if not using IFTTT
-	r = requests.post(ifturl, data={'event':'smartdb', 'value1':'No faces was detected', 'value2':imageURL})
+     #Command to send to webCoRE. Comment in the line below if not using webCoRE
+	#r = requests.post(wcurl, data={'person':'No'})
+     #Command to send to Pushover. Comment in the line below if not using Pushover
+	#r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
+     #Command to send to IFTTT. Comment in the line below if not using IFTTT
+	#r = requests.post(ifturl, data={'event':'smartdb', 'value1':'No faces was detected', 'value2':imageURL})
 if __name__ == '__main__':
     main()
