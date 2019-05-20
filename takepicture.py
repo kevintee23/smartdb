@@ -118,7 +118,7 @@ def main():
 
     else :
         print "[-] No faces detected...%s" % imageURL
-	nafacemsg = 'No face was detected - %s' % imageURL
+	nofacemsg = 'No face was detected - %s' % imageURL
      #Command to send to webCoRE. Comment in the line below if not using webCoRE
 	#r = requests.post(wcurl, data={'person':'No'})
      #Command to send to Pushover. Comment in the line below if not using Pushover
