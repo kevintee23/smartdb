@@ -105,7 +105,7 @@ def main():
 	 #Command to send to Pushover. Comment in the line below if not using Pushover
 	    #r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
 	 #Command to send to IFTTT. Comment in the line below if not using IFTTT
-	    #r = requests.post(ifturl, data={'event':'smartdb', 'value1':matchmsg, 'value2':imageURL})
+	    #r = requests.post(ifturl, data={'event':'smartdb', 'value1':matchmsg})
         else:
             print '[-] I detect a %s between the age of %s - %s. Mustache - %s, Sunglasses - %s... %s' % (resp['FaceDetails'][0]['Gender']['Value'], resp['FaceDetails'][0]['AgeRange']['Low'], resp['FaceDetails'][0]['AgeRange']['High'], resp['FaceDetails'][0]['Mustache']['Value'], resp['FaceDetails'][0]['Sunglasses']['Value'], imageURL)
 	    nomatchmsg = 'I detect a %s between the age of %s - %s. Mustache - %s, Sunglasses - %s... %s' % (resp['FaceDetails'][0]['Gender']['Value'], resp['FaceDetails'][0]['AgeRange']['Low'], resp['FaceDetails'][0]['AgeRange']['High'], resp['FaceDetails'][0]['Mustache']['Value'], resp['FaceDetails'][0]['Sunglasses']['Value'], imageURL)
@@ -114,15 +114,16 @@ def main():
 	 #Command to send to Pushover. Comment in the line below if not using Pushover
 	    #r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
 	 #Command to send to IFTTT. Comment in the line below if not using IFTTT
-	    #r = requests.post(ifturl, data={'event':'smartdb', 'value1':nomatchmsg, 'value2':imageURL})
+	    #r = requests.post(ifturl, data={'event':'smartdb', 'value1':nomatchmsg})
 
     else :
-        print "[-] No faces detected..."
+        print "[-] No faces detected...%s" % imageURL
+	nafacemsg = 'No face was detected - %s' % imageURL
      #Command to send to webCoRE. Comment in the line below if not using webCoRE
 	#r = requests.post(wcurl, data={'person':'No'})
      #Command to send to Pushover. Comment in the line below if not using Pushover
 	#r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
      #Command to send to IFTTT. Comment in the line below if not using IFTTT
-	#r = requests.post(ifturl, data={'event':'smartdb', 'value1':'No faces was detected', 'value2':imageURL})
+	#r = requests.post(ifturl, data={'event':'smartdb', 'value1':nofacemsg})
 if __name__ == '__main__':
     main()
