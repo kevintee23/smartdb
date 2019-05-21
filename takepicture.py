@@ -101,7 +101,7 @@ def main():
         resu, res = check_matches(client, imageFile)
     
         if (resu):
-            print '[+] I am %r confident that i saw %s... - %s' % (round(res['FaceMatches'][0]['Similarity'], 1), res['FaceMatches'][0]['Face']['ExternalImageId'], imageURL)
+            print '[+] I am %r confident that i saw %s... - <img src=%s width=900 height=600>' % (round(res['FaceMatches'][0]['Similarity'], 1), res['FaceMatches'][0]['Face']['ExternalImageId'], imageURL)
 	    matchmsg = 'I am %r confident that i saw %s... - %s' % (round(res['FaceMatches'][0]['Similarity'], 1), res['FaceMatches'][0]['Face']['ExternalImageId'], imageURL)
 	 #Command to send to webCoRE. Comment in the line below if not using webCoRE
             #r = requests.post(wcurl, data={'person':res['FaceMatches'][0]['Face']['ExternalImageId'], 'similarity':round(res['FaceMatches'][0]['Similarity'], 2), 'confidence':round(res['FaceMatches'][0]['Face']['Confidence'], 2), 'faceConfidence':round(resp['FaceDetails'][0]['Confidence'], 2), 'ageHigh':resp['FaceDetails'][0]['AgeRange']['High'], 'ageLow':resp['FaceDetails'][0]['AgeRange']['Low'], 'gender':resp['FaceDetails'][0]['Gender']['Value'], 'genderConf':round(resp['FaceDetails'][0]['Gender']['Confidence'], 2), 'mustache':resp['FaceDetails'][0]['Mustache']['Value'], 'sunglasses':resp['FaceDetails'][0]['Sunglasses']['Value']})
@@ -110,7 +110,7 @@ def main():
 	 #Command to send to IFTTT. Comment in the line below if not using IFTTT
 	    #r = requests.post(ifturl, data={'event':'smartdb', 'value1':matchmsg})
         else:
-            print '[-] I detect a %s between the age of %s - %s. Mustache - %s, Sunglasses - %s... %s' % (resp['FaceDetails'][0]['Gender']['Value'], resp['FaceDetails'][0]['AgeRange']['Low'], resp['FaceDetails'][0]['AgeRange']['High'], resp['FaceDetails'][0]['Mustache']['Value'], resp['FaceDetails'][0]['Sunglasses']['Value'], imageURL)
+            print '[-] I detect a %s between the age of %s - %s. Mustache - %s, Sunglasses - %s... - <img src=%s width=900 height=600>' % (resp['FaceDetails'][0]['Gender']['Value'], resp['FaceDetails'][0]['AgeRange']['Low'], resp['FaceDetails'][0]['AgeRange']['High'], resp['FaceDetails'][0]['Mustache']['Value'], resp['FaceDetails'][0]['Sunglasses']['Value'], imageURL)
 	    nomatchmsg = 'I detect a %s between the age of %s - %s. Mustache - %s, Sunglasses - %s... %s' % (resp['FaceDetails'][0]['Gender']['Value'], resp['FaceDetails'][0]['AgeRange']['Low'], resp['FaceDetails'][0]['AgeRange']['High'], resp['FaceDetails'][0]['Mustache']['Value'], resp['FaceDetails'][0]['Sunglasses']['Value'], imageURL)
 	 #Command to send to webCoRE. Comment in the line below if not using webCoRE
             #r = requests.post(wcurl, data={'person':'Unknown', 'faceConfidence':round(resp['FaceDetails'][0]['Confidence'], 2), 'ageHigh':resp['FaceDetails'][0]['AgeRange']['High'], 'ageLow':resp['FaceDetails'][0]['AgeRange']['Low'], 'gender':resp['FaceDetails'][0]['Gender']['Value'], 'genderConf':round(resp['FaceDetails'][0]['Gender']['Confidence'], 2), 'mustache':resp['FaceDetails'][0]['Mustache']['Value'], 'sunglasses':resp['FaceDetails'][0]['Sunglasses']['Value']})
@@ -120,7 +120,7 @@ def main():
 	    #r = requests.post(ifturl, data={'event':'smartdb', 'value1':nomatchmsg})
 
     else :
-        print "[-] No faces detected...%s" % imageURL
+        print "[-] No faces detected... - <img src=%s width=900 height=600>" % imageURL
 	nofacemsg = 'No face was detected - %s' % imageURL
      #Command to send to webCoRE. Comment in the line below if not using webCoRE
 	#r = requests.post(wcurl, data={'person':'No'})
