@@ -13,6 +13,9 @@ wcurl = 'https://graph-'      # The URL of your smart home piston/rule that the 
 POtoken = 'yourTokenHere'     # Your Pushover account Token ID
 POuser = 'yourUserKey'        # Your Pushover User Key
 ifturl = 'iftttUrlHere'       # Your IFTTT URL
+iftEvent = 'smartdb'          # The event name to trigger your IFTTT Maker account
 picQuality = 15               # Value range is between 10-100 (default:20)
 vflip = '-vf'                 # To vertical flip your picture enter "-vf", otherwise leave blank ("")
 hflip = '-hf'                 # To horizontally flip your picture enter "-hf", otherwise leave blank ("")
+
+# If you need more information, please visit http://mysmartcave.net
