@@ -99,6 +99,7 @@ wget -O hook.py -q --show-progress https://raw.github.com/kevintee23/smartdb/mas
 wget -O takepicture.py -q --show-progress https://raw.github.com/kevintee23/smartdb/master/takepicture.py
 wget -O README.md -q --show-progress https://raw.github.com/kevintee23/smartdb/master/README.md
 wget -O config.py --show-progress https://raw.github.com/kevintee23/smartdb/master/config.py
+wget -O config1.ini --show-progress https://raw.github.com/kevintee23/smartdb/master/config1.ini
 cd ~
 cd /home/pi/smartdb/templates
 wget -O gallery.html -q --show-progress https://raw.github.com/kevintee23/smartdb/master/templates/gallery.html
