@@ -11,10 +11,11 @@ import socket
 import time
 import subprocess
 from datetime import datetime
-import config
+from ConfigParser import ConfigParser
 
 #File Settings
 diskSpaceToReserve = 40 * 1024 * 1024 #Keep 40mb free on disk
+config = ConfigParser()
  
 def get_client():
     return b3.client('rekognition')
@@ -23,9 +24,9 @@ def get_client():
 def take_picture(diskSpaceToReserve):
 	keepDiskSpaceFree(diskSpaceToReserve)
 	time = datetime.now()
-	quality = config.picQuality
-	vflip = config.vflip
-	hflip = config.hflip
+	quality = config.get('Camera Settings', 'picQuality')
+	vflip = config.get('Camera Settings', 'vflip')
+	hflip = config.get('Camera Settings', 'hflip')
 	filename = "/home/pi/smartdb/static/capture-%04d%02d%02d-%02d%02d%02d.jpg" % (time.year, time.month, time.day, time.hour, time.minute, time.second)
 
 	print '[+] A photo is being taken now...'
@@ -81,13 +82,14 @@ def main():
     s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     s.connect(('8.8.8.8', 1))
     host_ip = s.getsockname()[0]
-    fport = config.fport
+    fport = config.get('Webserver', 'fport')
     files = {"attachment": ("image.jpg", open(imageFile, "rb"), "image/jpeg")}
     imageURL = imageFile.replace("/home/pi/smartdb/", "http://%s:%s/") % (host_ip, fport)
-    POtoken = config.POtoken
-    POuser = config.POuser
-    wcurl = config.wcurl
-    ifturl = config.ifturl
+    POtoken = config.get('App Settings', 'POtoken')
+    POuser = config.get('App Settings', 'POuser')
+    wcurl = config.get('App Settings', 'wcurl')
+    ifturl = config.get('App Settings', 'ifturl')
+    iftEvent = config.get('App Settings', 'iftEvent')
     
     print '[+] Getting things started...'
     
@@ -108,7 +110,7 @@ def main():
 	 #Command to send to Pushover. Comment in the line below if not using Pushover
 	    #r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
 	 #Command to send to IFTTT. Comment in the line below if not using IFTTT
-	    #r = requests.post(ifturl, data={'event':'smartdb', 'value1':matchmsg})
+	    #r = requests.post(ifturl, data={'event':iftEvent, 'value1':matchmsg})
         else:
             print '[-] I detect a %s between the age of %s - %s. Mustache - %s, Sunglasses - %s... - <img src=%s width=900 height=600>' % (resp['FaceDetails'][0]['Gender']['Value'], resp['FaceDetails'][0]['AgeRange']['Low'], resp['FaceDetails'][0]['AgeRange']['High'], resp['FaceDetails'][0]['Mustache']['Value'], resp['FaceDetails'][0]['Sunglasses']['Value'], imageURL)
 	    nomatchmsg = 'I detect a %s between the age of %s - %s. Mustache - %s, Sunglasses - %s... %s' % (resp['FaceDetails'][0]['Gender']['Value'], resp['FaceDetails'][0]['AgeRange']['Low'], resp['FaceDetails'][0]['AgeRange']['High'], resp['FaceDetails'][0]['Mustache']['Value'], resp['FaceDetails'][0]['Sunglasses']['Value'], imageURL)
@@ -117,7 +119,7 @@ def main():
 	 #Command to send to Pushover. Comment in the line below if not using Pushover
 	    #r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
 	 #Command to send to IFTTT. Comment in the line below if not using IFTTT
-	    #r = requests.post(ifturl, data={'event':'smartdb', 'value1':nomatchmsg})
+	    #r = requests.post(ifturl, data={'event':iftEvent, 'value1':nomatchmsg})
 
     else :
         print "[-] No faces detected... - <img src=%s width=900 height=600>" % imageURL
@@ -127,6 +129,6 @@ def main():
      #Command to send to Pushover. Comment in the line below if not using Pushover
 	#r = requests.post("https://api.pushover.net/1/messages.json", data = {"token": POtoken, "user": POuser, "message": imageURL}, files = files)
      #Command to send to IFTTT. Comment in the line below if not using IFTTT
-	#r = requests.post(ifturl, data={'event':'smartdb', 'value1':nofacemsg})
+	#r = requests.post(ifturl, data={'event':iftEvent, 'value1':nofacemsg})
 if __name__ == '__main__':
     main()
