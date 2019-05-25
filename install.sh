@@ -92,6 +92,7 @@ echo '[+] /home/pi/smartdb folders have been created...'
 mkdir /home/pi/smartdb/templates
 mkdir /home/pi/smartdb/scripts
 mkdir /home/pi/smartdb/static
+mkdir /home/pi/smartdb/faces
 cd ~
 cd /home/pi/smartdb
 wget -O gunicorn.service -q --show-progress https://raw.github.com/kevintee23/smartdb/master/gunicorn.service
