@@ -13,6 +13,7 @@ iftEvent = config.get('App Settings', 'iftEvent')
 picQuality = config.get('Camera Settings', 'picQuality')
 vflip = config.get('Camera Settings', 'vflip')
 hflip = config.get('Camera Settings', 'hflip')
+collectionid = config.get('App Settings', 'collectionid')
 
 print("Leave blank (by hitting ENTER) if you do not intend to change any of the values") 
 
@@ -142,5 +143,16 @@ else:
                 new_hflip=''
                 print("Flip Horizontally: FALSE")
                 
+with open('config1.ini', 'w') as configfile:
+	config.write(configfile)
+	
+#AWS Collection ID
+try:
+	new_collectionid=input("[Collection ID to use: %s] Port: " % collectionid)
+except SyntaxError:
+	new_collectionid=config.get('App Settings', 'collectionid')
+
+config.set('App Settings', 'collectionid', new_collectionid)
+
 with open('config1.ini', 'w') as configfile:
 	config.write(configfile)
