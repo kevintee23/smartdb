@@ -65,9 +65,10 @@ def check_face(client, file):
 
 #Check if there is any faces that match the collection
 def check_matches(client, file):
+    collectionid = config.get('App Settings', 'collectionid')
     face_matches = False
     with open(file, 'rb') as image:
-        response = client.search_faces_by_image(CollectionId='myfamily', Image={'Bytes': image.read()}, MaxFaces=1, FaceMatchThreshold=85)
+        response = client.search_faces_by_image(CollectionId=collectionid, Image={'Bytes': image.read()}, MaxFaces=1, FaceMatchThreshold=85)
         if (not response['FaceMatches']):
             face_matches = False
         else:
