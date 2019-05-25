@@ -3,6 +3,10 @@
 import boto3 as b3
 from argparse import ArgumentParser
 from time import gmtime, strftime
+from ConfigParser import ConfigParser
+
+config = ConfigParser()
+config.read('config1.ini')
 
 def get_client():
     return b3.client('rekognition')
@@ -17,12 +21,13 @@ if __name__ == '__main__':
     
     client = get_client()
 
-    print '[+] Adding a new collection to aws rekognition called %s...' % (args.name)
+    print ("Adding a new collection to aws rekognition called %s...") % (args.name)
     response = client.create_collection(CollectionId=args.name)
 
     if (response['ResponseMetadata']['HTTPStatusCode'] == 200):
         current = strftime("%Y-%m-%d %H:%M:%S", gmtime())
         with open('collections.txt', 'a+') as file:
             file.write(('%s | %s') % (current, args.name))
+        config.set('App Settings', 'collectionid', args.name)
 
-        print '[+] Done!'
+        print ("%s is now set as your default collection. To change type python config.py") % (args.name)
