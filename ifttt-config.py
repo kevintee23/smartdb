@@ -12,24 +12,10 @@ print("Leave blank (by hitting ENTER) if you do not intend to change any of the 
 print("-------------------------------------------------------------------------------")
 print(" ")
 
-print("---------------")
-print("IFTTT Maker URL")
-print("_______________")
-new_ifturl=raw_input("Enter/paste IFTTT Maker URL: ")
-if new_ifturl == '':
-        new_ifturl=ifturl
-
-config.set('App Settings', 'ifturl', new_ifturl)
-
-with open('config1.ini', 'w') as configfile:
-        config.write(configfile)
-        print("Saved - IFT Maker URL: %s" % config.get('App Settings', 'ifturl'))
-print(" ")
-
-print("----------------")
-print("IFTTT Event Name")
-print("________________")
-new_iftEvent=raw_input("[Event Name: %s] New Event Name: " % iftEvent)
+print("-----------------------------------------")
+print("IFTTT Event Name (as configured in IFTTT)")
+print("_________________________________________")
+new_iftEvent=raw_input("[Event Name %s] New Event Name: " % iftEvent)
 if new_iftEvent == '':
         new_iftEvent=iftEvent
 
@@ -38,6 +24,20 @@ config.set('App Settings', 'iftEvent', new_iftEvent)
 with open('config1.ini', 'w') as configfile:
         config.write(configfile)
         print("Saved - IFTTT Event Name: %s" % config.get('App Settings', 'iftEvent'))
+print(" ")
+
+print("---------------")
+print("IFTTT Maker URL")
+print("_______________")
+new_ifturl=raw_input("Enter/paste IFTTT Maker URL: https://maker.ifttt.com/trigger/%s/smart/with/key/" % new_iftEvent)
+if new_ifturl == 'https://maker.ifttt.com/trigger/%s/smart/with/key/':
+        new_ifturl=ifturl
+
+config.set('App Settings', 'ifturl', new_ifturl)
+
+with open('config1.ini', 'w') as configfile:
+        config.write(configfile)
+        print("Saved - IFT Maker URL: %s" % config.get('App Settings', 'ifturl'))
 print(" ")
 
 print("----------------------------------------------")
