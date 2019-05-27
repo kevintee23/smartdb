@@ -45,7 +45,7 @@ config.set('App Settings', 'wcurl', new_wcurl)
 
 with open('config1.ini', 'w') as configfile:
         config.write(configfile)
-        print("Saved - Port: %s" % config.get('App Settings', 'wcurl'))
+        print("Saved - Piston URL: %s" % config.get('App Settings', 'wcurl'))
 print(" ")
 
 print("--------------")
@@ -188,3 +188,7 @@ for section_name in config.sections():
 	for name, value in config.items(section_name):
 		print("    {} = {}".format(name,value))
 	print(" ")
+	
+print("------------------------------------------------------")	
+print("To change IFTTT settings, run - python ifttt-config.py")
+print("______________________________________________________")
