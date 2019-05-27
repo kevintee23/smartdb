@@ -15,74 +15,70 @@ vflip = config.get('Camera Settings', 'vflip')
 hflip = config.get('Camera Settings', 'hflip')
 collectionid = config.get('App Settings', 'collectionid')
 
+print (" ")
 print("Leave blank (by hitting ENTER) if you do not intend to change any of the values") 
+print("-------------------------------------------------------------------------------")
+print(" ")
 
-#for section_name in config.sections():
-#	print("Section:", section_name)
-#	for name, value in config.items(section_name):
-#		print("    {} = {}".format(name,value))
-#	print()
-
-#webserver port
-try:
-	new_fport=input("[Current Port: %s] Port: " % fport)
-except SyntaxError:
-	new_fport=config.get('Webserver', 'fport')
+print("-------------")
+print("Port Settings")
+print("_____________")
+new_fport=raw_input("[Current Port: %s] Port: " % fport)
+if new_fport == '':
+        new_fport=fport
 
 config.set('Webserver', 'fport', new_fport)
 
-#Picture quality
-try:
-	new_picQuality=input("[Current quality settings: %s] Quality: " % picQuality)
-except SyntaxError:
-	new_picQuality=config.get('Camera Settings', 'picQuality')
+with open('config1.ini', 'w') as configfile:
+        config.write(configfile)
+        print("Saved - Port: %s" % config.get('Webserver', 'fport'))
+print(" ")
 
-config.set('Camera Settings', 'picQuality', new_picQuality)
-
-#webCoRE piston URL
-try:
-        new_wcurl=input("Enter/paste webCoRE piston URL: ")
-except SyntaxError:
-        new_wcurl=config.get('App Settings', 'wcurl')
+print("--------------------")
+print("WebCoRE URL Settings")
+print("____________________")
+new_wcurl=raw_input("Enter/paste webCoRE piston URL: ")
+if new_wcurl == '':
+        new_wcurl=wcurl
 
 config.set('App Settings', 'wcurl', new_wcurl)
 
-#Pushover Token settings
-try:
-        new_POtoken=input("[Pushover Token: %s] New Token: " % POtoken)
-except SyntaxError:
-        new_POtoken=config.get('App Settings', 'POtoken')
+with open('config1.ini', 'w') as configfile:
+        config.write(configfile)
+        print("Saved - Port: %s" % config.get('App Settings', 'wcurl'))
+print(" ")
+
+print("--------------")
+print("Pushover Token")
+print("______________")
+new_POtoken=raw_input("[Pushover Token: %s] New Token: " % POtoken)
+if new_POtoken == '':
+        new_POtoken=POtoken
 
 config.set('App Settings', 'POtoken', new_POtoken)
 
-#Pushover User key
-try:
-        new_POuser=input("[Pushover User Key: %s] New User Key: " % POuser)
-except SyntaxError:
-        new_POuser=config.get('App Settings', 'POuser')
+with open('config1.ini', 'w') as configfile:
+        config.write(configfile)
+        print("Saved - Pushover Token: %s" % config.get('App Settings', 'POtoken'))
+print(" ")
+
+print("-----------------")
+print("Pushover User Key")
+print("_________________")
+new_POuser=raw_input("[Pushover User Key: %s] New User Key: " % POuser)
+if new_POuser == '':
+        new_POuser=POuser
 
 config.set('App Settings', 'POuser', new_POuser)
 
-#IFTTT URL
-try:
-        new_ifturl=input("Enter/paste your IFTTT Maker URL: ")
-except SyntaxError:
-        new_ifturl=config.get('App Settings', 'ifturl')
-
-config.set('App Settings', 'ifturl', new_ifturl)
-
-#IFTTT Event Name
-try:
-        new_iftEvent=input("[IFTTT Event Name: %s] Event Name: " % iftEvent)
-except SyntaxError:
-        new_iftEvent=config.get('App Settings', 'iftEvent')
-
-config.set('App Settings', 'iftEvent', new_iftEvent)
-
 with open('config1.ini', 'w') as configfile:
-	config.write(configfile)
+        config.write(configfile)
+        print("Saved - Pushover User Key: %s" % config.get('App Settings', 'POuser'))
+print(" ")
 
-#Picture - Vertical Setting
+print("--------------------------")
+print("Picture Setting - Vertical")
+print("__________________________")
 if vflip == '-vf':
         new_vflip=raw_input("Flip Vertically: TRUE; change(yes/no)")
         if new_vflip == 'no':
@@ -104,17 +100,22 @@ else:
                 print("Flip Vertically: FALSE")
                 
         if new_vflip == 'yes':
-        		new_vflip='vf'
+        		new_vflip='-vf'
         		print("Flip Vertically: TRUE")
         		
         else:
                 new_vflip=''
                 print("Flip Vertically: FALSE")
                 
+config.set('Camera Settings', 'vflip', new_vflip)
+
 with open('config1.ini', 'w') as configfile:
 	config.write(configfile)
-                
-#Picture - Horizontal Setting
+print(" ")
+
+print("----------------------------")
+print("Picture Setting - Horizontal")
+print("____________________________")
 if hflip == '-hf':
         new_hflip=raw_input("Flip Horizontally: TRUE, change(yes/no)")
         if new_hflip == 'no':
@@ -136,23 +137,54 @@ else:
                 print("Flip Horizontally: FALSE")
                 
         if new_hflip == 'yes':
-        		new_hflip='hf'
+        		new_hflip='-hf'
         		print("Flip Horizontally: TRUE")
         		
         else:
                 new_hflip=''
                 print("Flip Horizontally: FALSE")
                 
+config.set('Camera Settings', 'hflip', new_hflip)
+
 with open('config1.ini', 'w') as configfile:
 	config.write(configfile)
-	
-#AWS Collection ID
-try:
-	new_collectionid=input("[Collection ID to use: %s] Port: " % collectionid)
-except SyntaxError:
-	new_collectionid=config.get('App Settings', 'collectionid')
+print(" ")
+
+print("------------------------")
+print("Picture Quality (1 - 100)")
+print("________________________")
+new_picQuality=raw_input("[Current Picture Quality: %s] New Setting: " % picQuality)
+if new_picQuality == '':
+        new_picQuality=picQuality
+
+config.set('Camera Settings', 'picQuality', new_picQuality)
+
+with open('config1.ini', 'w') as configfile:
+        config.write(configfile)
+        print("Saved - Picture Quality: %s" % config.get('Camera Settings', 'picQuality'))
+print(" ")
+
+print("------------------------")
+print("AWS Collection ID")
+print("________________________")
+new_collectionid=raw_input("[Collection ID used: %s] New Collection ID: " % collectionid)
+if new_collectionid == '':
+        new_collectionid=collectionid
 
 config.set('App Settings', 'collectionid', new_collectionid)
 
 with open('config1.ini', 'w') as configfile:
-	config.write(configfile)
+        config.write(configfile)
+        print("Saved - Collection ID Used: %s" % config.get('App Settings', 'collectionid'))
+print(" ")
+
+print("----------------------------------------")
+print("THIS IS YOUR UPDATED SETTINGS")
+print("-run python config.py to change settings")
+print("________________________________________")
+
+for section_name in config.sections():
+	print("Section:", section_name)
+	for name, value in config.items(section_name):
+		print("    {} = {}".format(name,value))
+	print(" ")
