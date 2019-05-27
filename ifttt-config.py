@@ -15,7 +15,7 @@ print(" ")
 print("-----------------------------------------")
 print("IFTTT Event Name (as configured in IFTTT)")
 print("_________________________________________")
-new_iftEvent=raw_input("[Event Name %s] New Event Name: " % iftEvent)
+new_iftEvent=raw_input("[Event Name: %s] New Event Name: " % iftEvent)
 if new_iftEvent == '':
         new_iftEvent=iftEvent
 
@@ -29,11 +29,13 @@ print(" ")
 print("---------------")
 print("IFTTT Maker URL")
 print("_______________")
-new_ifturl=raw_input("Enter/paste IFTTT Maker URL: https://maker.ifttt.com/trigger/%s/smart/with/key/" % new_iftEvent)
-if new_ifturl == 'https://maker.ifttt.com/trigger/%s/smart/with/key/':
-        new_ifturl=ifturl
+new_ifturl=raw_input("Enter/paste IFTTT Maker URL: https://maker.ifttt.com/trigger/%s/with/key/" % new_iftEvent)
+if new_ifturl == '':
+        new_ifturl1=ifturl
+else:
+	new_ifturl1='https://maker.ifttt.com/trigger/%s/with/key/%s' % (new_iftEvent, new_ifturl)
 
-config.set('App Settings', 'ifturl', new_ifturl)
+config.set('App Settings', 'ifturl', new_ifturl1)
 
 with open('config1.ini', 'w') as configfile:
         config.write(configfile)
