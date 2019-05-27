@@ -49,7 +49,7 @@ config.set('App Settings', 'wcurl', new_wcurl)
 
 #Pushover Token settings
 try:
-        new_POtoken=input("[Current Token: %s] New Token: " % POtoken)
+        new_POtoken=input("[Pushover Token: %s] New Token: " % POtoken)
 except SyntaxError:
         new_POtoken=config.get('App Settings', 'POtoken')
 
@@ -57,7 +57,7 @@ config.set('App Settings', 'POtoken', new_POtoken)
 
 #Pushover User key
 try:
-        new_POuser=input("[Current User Key: %s] New User Key: " % POuser)
+        new_POuser=input("[Pushover User Key: %s] New User Key: " % POuser)
 except SyntaxError:
         new_POuser=config.get('App Settings', 'POuser')
 
@@ -73,7 +73,7 @@ config.set('App Settings', 'ifturl', new_ifturl)
 
 #IFTTT Event Name
 try:
-        new_iftEvent=input("[Current Event Name: %s] Event Name: " % iftEvent)
+        new_iftEvent=input("[IFTTT Event Name: %s] Event Name: " % iftEvent)
 except SyntaxError:
         new_iftEvent=config.get('App Settings', 'iftEvent')
 
@@ -84,7 +84,7 @@ with open('config1.ini', 'w') as configfile:
 
 #Picture - Vertical Setting
 if vflip == '-vf':
-        new_vflip=raw_input("Flip Vertically: TRUE, change(yes/no)")
+        new_vflip=raw_input("Flip Vertically: TRUE; change(yes/no)")
         if new_vflip == 'no':
                 new_vflip='-vf'
                 print("Flip Vertically: TRUE")
@@ -98,7 +98,7 @@ if vflip == '-vf':
                 print("Flip Vertically: TRUE")
                 
 else:
-        new_vflip=raw_input("Flip Vertically: FALSE, change(yes/no)")
+        new_vflip=raw_input("Flip Vertically: FALSE; change(yes/no)")
         if new_vflip == 'no':
                 new_vflip=''
                 print("Flip Vertically: FALSE")
