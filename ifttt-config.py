@@ -37,7 +37,7 @@ config.set('App Settings', 'iftEvent', new_iftEvent)
 
 with open('config1.ini', 'w') as configfile:
         config.write(configfile)
-        print("Saved - IFTTT Event Name: %s" % config.get('App Settings', 'ifturl'))
+        print("Saved - IFTTT Event Name: %s" % config.get('App Settings', 'iftEvent'))
 print(" ")
 
 print("----------------------------------------------")
