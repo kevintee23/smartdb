@@ -16,17 +16,18 @@ Once completed, type in the following- <code>bash ./install.sh</code>
 Required to get an AWS Rekognition account and obtain Access Key ID and Secret Access Key. Once that has been obtain, when user run 'aws configure' they will need to enter those information. As for the region setting, it should also be the same when setting up the AWS Rekognition account (tested and working on us-west-2).
 
 Once that is setup, you will need to create a collection. To create a collection:-
-
-<li><code>cd</code></li>
-<li><code>cd /smartdb/script</code></li>
-<li><code>python add_collection.py -n 'collectionName'</code></li>
+```
+$ cd
+$ cd /smartdb/script
+$ python add_collection.py -n 'collectionName'
+```
 #enter the name of the collection like 'home' or 'family' or 'peopleiknow'. You can create as many, but only 1 collection will work for this automation.
 
 You will then need to rekognition to know who is who. Around 3-5 images per person would be good.
 ```
-<li><code>cd</code></li>
-<li><code>cd /smartdb/faces</code></li>
-<li><code>python /home/pi/smartdb/scripts/add_faces.py -i 'imagename.jpg' -c 'collectionName' -l 'name'</code></li>
+$ cd
+$ cd /smartdb/faces
+$ python /home/pi/smartdb/scripts/add_faces.py -i 'imagename.jpg' -c 'collectionName' -l 'name'
 ```
 
 <b>Files</b>
