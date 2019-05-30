@@ -23,11 +23,11 @@ Once that is setup, you will need to create a collection. To create a collection
 #enter the name of the collection like 'home' or 'family' or 'peopleiknow'. You can create as many, but only 1 collection will work for this automation.
 
 You will then need to rekognition to know who is who. Around 3-5 images per person would be good.
-
+```
 <li><code>cd</code></li>
 <li><code>cd /smartdb/faces</code></li>
 <li><code>python /home/pi/smartdb/scripts/add_faces.py -i 'imagename.jpg' -c 'collectionName' -l 'name'</code></li>
-
+```
 
 <b>Files</b>
 
