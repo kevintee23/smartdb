@@ -3,14 +3,14 @@ Smart Door Bell System (Not Completed)
 
 This script works on a Raspberry Pi with a Raspberry Camera module. Tailored to work with SmartThings and webCoRE. Basically when a motion is detected or a button is pressed, webCoRE will then initiate a GET request to the Raspberry Pi. When the response is received is received on the RPi, it will take a picture within 1 second. The picture is then sent over to AWS Rekognition for facial recognition. The response from rekognition is then passed over to webCoRE for more advanced automations.
 
-On your raspberry pi terminal enter - <code>wget https://raw.githubusercontent.com/kevintee23/smartdb/master/install.sh</code>
-
-
-
-Once completed, type in the following- <code>bash ./install.sh</code>
-
-
-
+On your raspberry pi terminal enter:
+```
+$ wget https://raw.githubusercontent.com/kevintee23/smartdb/master/install.sh
+```
+Once completed, type in the following:-
+```
+$ bash ./install.sh
+```
 
 
 Required to get an AWS Rekognition account and obtain Access Key ID and Secret Access Key. Once that has been obtain, when user run 'aws configure' they will need to enter those information. As for the region setting, it should also be the same when setting up the AWS Rekognition account (tested and working on us-west-2).
