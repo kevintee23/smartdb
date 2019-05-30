@@ -48,3 +48,6 @@ The pictures that the camera captures will be appropriately named based on the t
   
   From there, go to the Localization Options and select your timezone. Once that is done, the captured images will let you know when the picture was taken.
 
+```
+2018-03-31T18:27:09.508Z a90824f40764eb5df1fccc4f5cb95dd3 reconnectionManagement(): reconnecting
+```
