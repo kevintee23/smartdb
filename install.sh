@@ -150,7 +150,7 @@ sudo systemctl enable gunicorn
 
 echo "
 -------------------------------------------------------------
-INFO  : Leaning up old system files...
+INFO  : Cleaning up old system files...
 -------------------------------------------------------------
 "
 cd ~
@@ -166,14 +166,22 @@ A few things before you start.
 
 1 - setup your AWS settings by typing in 'aws configure' on your terminal screen.
 
-2 - Activate your raspberry pi camera by typing on terminal:-
+2 - Checking to see if your camera is connected
+"
+vcgencmd get_camera
+
+echo "
+
+3 - If the result for both is 1, then you're good to go! If not, read on...
+
+4 - Activate your raspberry pi camera by typing on terminal:-
     - sudo raspi-config
     - go to 'Interfacing Options'
     - Select P1 Camera
     - Select Yes to enable it
     - system will reboot
     
-3 - To check if the service is running in the background, so that the service will keep on running when you exit terminal,
+5 - To check if the service is running in the background, so that the service will keep on running when you exit terminal,
     type in 'ps -ef | grep gunicorn'. You should see that some messages that say 
     '/usr/bin/python /usr/bin/gunicorn -b 0.0.0.0:5000'. If it is not for some reason, run the following command:-
     - sudo systemctl daemon-reload
