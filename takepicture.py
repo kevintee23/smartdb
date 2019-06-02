@@ -16,6 +16,8 @@ from ConfigParser import ConfigParser
 #File Settings
 diskSpaceToReserve = 40 * 1024 * 1024 #Keep 40mb free on disk
 config = ConfigParser()
+
+config.read('config1.ini')
  
 def get_client():
     return b3.client('rekognition')
