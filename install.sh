@@ -160,49 +160,20 @@ rm -v get-pip.py
 
 echo "
 -------------------------------------------------------------
-INFO  : Checking if camera is setup correctly...
--------------------------------------------------------------
-"
-echo -e "Checking your Raspberry Pi Camera..."
-
-camResult=$(vcgencmd get_camera)
-
-echo -e "The result is $camResult"
-
-if [ "$camResult" = "supported=1 detected=1" ]; then
-        echo -e "Camera module is enabled and connected!"
-else
-        echo -e "$camResult"
-        echo -e "if supported=0, enable camera using sudo raspi-config"
-        echo -e "if detected=0, check Pi Camera is installed correctly"
-fi;
-
-
-echo "
--------------------------------------------------------------
 INFO  : Completed!! Just a few more things...
 -------------------------------------------------------------
 A few things before you start.
 
 1 - setup your AWS settings by typing in 'aws configure' on your terminal screen.
-
-2 - If the result for both is 1, then you're good to go! If not, read on...
-
-3 - Activate your raspberry pi camera by typing on terminal:-
-    - sudo raspi-config
-    - go to 'Interfacing Options'
-    - Select P1 Camera
-    - Select Yes to enable it
-    - system will reboot
     
-4 - To check if the service is running in the background, so that the service will keep on running when you exit terminal,
+2 - To check if the service is running in the background, so that the service will keep on running when you exit terminal,
     type in 'ps -ef | grep gunicorn'. You should see that some messages that say 
-    '/usr/bin/python /usr/bin/gunicorn -b 0.0.0.0:5000'. If it is not for some reason, run the following command:-
+    '/usr/bin/python /usr/bin/gunicorn -b 0.0.0.0:5000'. If you do not see it for some reason, run the following command:-
     - sudo systemctl daemon-reload
     - sudo systemctl start gunicorn
     - sudo systemctl enable gunicorn
     
-5 - Checking if camera is installed correctly...
+3 - Checking if camera is installed correctly...
 "
 camResult=$(vcgencmd get_camera)
 
