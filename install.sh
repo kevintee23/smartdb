@@ -148,15 +148,6 @@ sudo systemctl start gunicorn
 sudo systemctl enable gunicorn
 
 
-echo "
--------------------------------------------------------------
-INFO  : Cleaning up old system files...
--------------------------------------------------------------
-"
-cd ~
-rm -v install.sh
-rm -v get-pip.py
-
 
 echo "
 -------------------------------------------------------------
@@ -185,3 +176,5 @@ else
         echo -e "if detected=0, check Pi Camera is installed correctly"
 
 exit 0
+
+
