@@ -44,7 +44,7 @@ print(" ")
 
 print("----------------------------------------------")
 print("THIS IS YOUR UPDATED SETTINGS")
-print("-run python ifttt-config.py to change settings")
+print("-run: python ifttt-config.py to change settings")
 print("______________________________________________")
 
 for section_name in config.sections():
@@ -54,5 +54,5 @@ for section_name in config.sections():
 	print(" ")
 
 print("------------------------------------------------")	
-print("To change other settings, run - python config.py")
+print("To change other settings, run: python config.py")
 print("________________________________________________")
