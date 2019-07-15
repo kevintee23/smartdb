@@ -180,7 +180,7 @@ print(" ")
 
 print("----------------------------------------")
 print("THIS IS YOUR UPDATED SETTINGS")
-print("-run python config.py to change settings")
+print("-run: python config.py to change settings")
 print("________________________________________")
 
 for section_name in config.sections():
@@ -190,5 +190,5 @@ for section_name in config.sections():
 	print(" ")
 	
 print("------------------------------------------------------")	
-print("To change IFTTT settings, run - python ifttt-config.py")
+print("To change IFTTT settings, run: python ifttt-config.py")
 print("______________________________________________________")
